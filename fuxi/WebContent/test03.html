@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>原生ajax练习</title>
+	<script src="js/jquery-3.5.1.js"></script>
+</head>
+<body>
+	<h2>百度一下</h2>
+	<input id="text" style="width:400px;"><button id="ss">搜索</button>
+	<div>
+	
+	</div>
+	<script>
+		$("#ss").click(function(){
+			var text=$("#text").val();
+			//***1.创建XMLHTTPRequest对象；
+			var xhr= new XMLHttpRequest();
+			//2.使用open方法设置和服务器的交互信息
+			xhr.open("get","Servlet_Sousuo?text="+text);
+			//***3.设置发送的数据，开始和服务器端交互；
+			xhr.send();
+			//***4.注册事件，监听readyState状态变化；
+			xhr.onreadystatechange= function(){
+				if(xhr.readyState==4){
+					//状态我们判断完了，是4，也就是最终完成
+					//***判断状态码
+					if(xhr.status==200){
+						//当状态readystate==4，且status==200，说明我们本次请求才是完整的无错误的完成
+						var data=xhr.responseText;
+						console.log(data);
+						$("div").text(data);
+					}
+				}
+			}
+		});
+	</script>
+</body>
+</html>

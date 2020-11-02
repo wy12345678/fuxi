@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jquery+json练习</title>
+	<style>
+		ul{
+			list-style:none;
+		}
+	</style>
+	<script src="js/jquery-3.5.1.js"></script>
+</head>
+<body>
+	<h2>百度一下</h2>
+	<input id="text" style="width:400px;"><button id="ss">搜索</button>
+	<div>
+		<ul>
+			
+		</ul>
+		<div>
+			
+		</div>
+	</div>
+	<script>
+		$("#ss").click(function(){
+			//使用json返回数据
+			$.ajax({
+				type:"get",
+				url:"Servlet_Sousuo?text="+$("#text").val(),
+				success:function(data){
+					$("div ul").html("");
+					/* $("div").text(data); 返回数据为字符串的方式*/
+					//遍历后台返回的json数组对象
+					/* 第一种遍历形式
+					for(var i in data){
+						var str="<li>";
+						str+=data[i].name;
+						str+="</li>";
+						$("div ul").append(str);
+					} */
+					/* //遍历第二种形式
+					$.each(data,function(index,obj){
+						var str="<li>";
+						str+=obj.name;
+						str+="</li>";
+						$("div ul").append(str);
+					}) */
+					$.each(data,function(index,obj){
+						var str="<li onclick='getInfo(\""+obj.name+"\")'>";
+						//str+="<a href='Servlet_shopinfo?name="
+						str+=obj.name;
+						//str+="'>"+obj.name+"</a>"
+						str+="</li>";
+						$("div ul").append(str);
+					})
+				},
+				error:function(){
+					console.log("本次请求失败");
+				},
+				dataType:"JSON"
+			});
+			/* //使用jquery用ajax实现异步请求
+			$.ajax({
+				type:"get",
+				url:"Servlet_Sousuo?text="+$("#text").val(),
+				success:function(data){
+					$("div").text(data);
+				},
+				error:function(){
+					console.log("本次请求失败");
+				},
+				dataType:"text"
+			})	 */
+		});
+		 function getInfo(name){
+			 $.ajax({
+					type:"get",
+					url:"Servlet_shopinfo?text="+name,
+					success:function(data){
+						var ht="<h2>商品详情</h2>";
+						ht+="商品名称："+data.name+"<br>";
+						ht+="商品价格："+data.price+"<br>";
+						$("div div").html(ht);
+					},
+					error:function(){
+						console.log("本次请求失败");
+					},
+					dataType:"json"
+				})
+		}; 
+	</script>
+</body>
+</html>

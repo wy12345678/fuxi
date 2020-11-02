@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>获取和设置表单元素</title>
+	<script src="js/jquery-3.5.1.js"></script>
+</head>
+<body>
+	<h2>注册</h1>
+	<form id="f1" action="#" method="post">
+		用户名：<input id="yhm" style="width:200px"><br>
+		密码：<input id="pw" type="password" style="width:200px"><br>
+		性别：<input type="radio" name="sex" value="男"/>男
+			<input type="radio" name="sex" value="女"/>女<br>
+		爱好：<input type="checkbox" name="ah" value="唱歌"/>唱歌 
+			<input type="checkbox" name="ah" value="跳舞"/>跳舞
+			<input type="checkbox" name="ah" value="打球"/>打球
+			<br>
+		家乡：<select id="jx">
+				<option value="长春">长春</option>
+				<option value="延吉">延吉</option>
+				<option value="四平">四平</option>
+				<option value="吉林">吉林</option>
+			</select>
+		<br>
+		<input type="button" value="提交" id="tijiao"/>
+	</form>
+	<script>
+		$("#tijiao").click(function(){
+			var yhm=$("#yhm").val();//获取用户名中的值
+			var pw=$("#pw").val();//获取密码框中的值
+			var sex=$("input[name='sex']:checked").val();//获取单选按钮选中的值
+			//$("input[name='sex'][value='女']").attr("checked","checked");//设置某个单选按钮选中
+			var ah="";
+			var aharr=$("input[type='checkbox']:checked");//获取多选框中选中的值
+			aharr.each(function(index,element){//遍历多选框中选中的值进行拼接
+				ah+=$(this).val()+",";
+			});
+			console.log(ah)
+			//var aharr=$("input[type='checkbox']");//获取多选框中的值
+			/* aharr.each(function(index,element){//设置多选框中某个值是选中状态
+				if($(this).val()=="唱歌"){
+					$(this).attr("checked","checked");
+				}
+			}); */
+			var jx=$("#jx option:selected").val();//获取下拉选选中的值
+			$("option").each(function(index,element){//循环遍历下拉选中的所有值
+				console.log($(this).val())
+			}) 
+			$('#jx option:eq(1)').attr("selected","selected");//设置某一个选项是选中状态
+			$('#jx option:eq(1)').remove();//指定删除某一元素
+			$("#jx").append("<option value='松原'>松原</option>")
+		});
+	</script>
+</body>
+</html>

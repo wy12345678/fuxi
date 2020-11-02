@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>语法练习+选择器练习</title>
+	<script src="js/jquery-3.5.1.js"></script>
+</head>
+<body>
+	<button id="btn_show">显示</button>
+	<button id="btn_hide">隐藏</button>
+	<button id="btn_change">切换</button>
+	<br>
+	<button id="btn_slideDown">滑动显示</button>
+	<button id="btn_slideUp">滑动隐藏</button>
+	<button id="btn_slideToggle">滑动切换</button>
+	<br>
+	<button id="btn_fadeIn">淡入</button>
+	<button id="btn_fadeOut">淡出</button>
+	<button id="btn_fadeToggle">切换</button>
+	<div id="dd">
+		<div id="d1">
+			春晓
+		</div>
+		<div class="c1">李白</div>
+		<ul>
+			<li id="l1">春眠不觉晓，</li>
+			<li>处处闻啼鸟。</li>
+			<li class="l3">夜来风雨声，</li>
+			<li class="l4">花落知多少。</li>
+		</ul>
+	</div>
+	<script>
+		//第一个练习，熟悉jQuery语法，【元素.函数名()】
+		//console.log("第一个div的内容是："+$("#d1").text());
+		//jQuery的语法格式我们了解了，我们会发现，语法的第一个就是要先选择一个页面中的元素，
+		//再继续对这个元素进行操作，选取页面元素就要用到jQuery给我们提供的选择器
+		//我们先前学习中有所了解，选择器分类有很多种，我们重点复习几个常用的选择器
+		//首先使用以下id选择器
+		console.log("我是用id选择器："+$("#d1").text());
+		//我们使用以下类选择器
+		console.log("我是用class选择器："+$(".c1").text());
+		//我们再练习一个经常使用的属性选择器，属性选择器就是某一元素包含某种属性
+		$("li[id]").css("border","5px solid red");
+		$("li[class='l4']").css("border","5px solid green");
+		//事件绑定+动画效果
+		$("#btn_show").click(function(){
+			$("#dd").show(3000);
+		});
+		$("#btn_hide").click(function(){
+			$("#dd").hide();
+		});
+		$("#btn_change").click(function(){
+			$("#dd").toggle(1000);
+		});
+		$("#btn_slideUp").click(function(){
+			$("#dd").slideUp(1000);
+		});
+		$("#btn_slideDown").click(function(){
+			$("#dd").slideDown(1000);
+		});
+		$("#btn_slideToggle").click(function(){
+			$("#dd").slideToggle(1000);
+		});
+		$("#btn_fadeIn").click(function(){
+			$("#dd").fadeIn(1000);
+		});
+		$("#btn_fadeOut").click(function(){
+			$("#dd").fadeOut(1000);
+		});
+		$("#btn_fadeToggle").click(function(){
+			$("#dd").fadeToggle(3000);
+		});
+	</script>
+</body>
+</html>
